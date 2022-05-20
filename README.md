@@ -15,4 +15,4 @@ git config --global core.autocrlf true
 ```
 
 ### Therapia ERD
-![테라피아ERD](https://user-images.githubusercontent.com/63544044/168755135-6500732c-164c-4ca2-83d3-a04a464b15de.png)
+![ERD](https://user-images.githubusercontent.com/30895117/169230353-a886531e-4d33-4612-97a3-f00b938cc9ff.jpg)
