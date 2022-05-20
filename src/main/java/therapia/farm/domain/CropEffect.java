@@ -6,24 +6,20 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "crop_effect")
 @Getter @Setter
-public class Review {
+public class CropEffect {
     @Id
     @GeneratedValue
-    @Column(name = "review_id")
+    @Column(name = "crop_effect_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id")
-    private Users users;
-
-    private String title;
+    @JoinColumn(name = "effect_id")
+    private Effect effect;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "farm_id")
-    private Farm farm;
+    @JoinColumn(name = "crop_id")
+    private Crop crop;
 
-    private String contents;
-
-    private Double rating;
 }
