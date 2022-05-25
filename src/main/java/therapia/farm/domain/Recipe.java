@@ -16,8 +16,6 @@ public class Recipe {
     @Column(name = "recipe_id")
     private Long id;
 
-    private String photoUrl;
-
     private String ingredient;
 
     //private List<> cooking;  요리법...인데 아직 구조를 모르니까 보류
