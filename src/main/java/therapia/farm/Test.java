@@ -3,13 +3,15 @@ package therapia.farm;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter @Setter
 public class Test {
     private int a;
 
     public static void main(String[] args) {
-        Test test = new Test();
-        test.setA(5);
-        System.out.println(test.getA());
+//        List<Integer> integers = new
+//        System.out.println(integers);
     }
 }
