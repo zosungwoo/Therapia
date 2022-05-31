@@ -1,4 +1,4 @@
 package therapia.farm.domain;
 
-public class Effect {
+public class User {
 }
