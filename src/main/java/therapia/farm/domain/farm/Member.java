@@ -1,17 +1,15 @@
-package therapia.farm.domain;
+package therapia.farm.domain.farm;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter @Setter
-public class Users {
+public class Member {
     @Id @GeneratedValue
-    @Column(name = "users_id")
+    @Column(name = "member_id")
     private Long id;
 
 //    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)

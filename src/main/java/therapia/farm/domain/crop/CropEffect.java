@@ -1,4 +1,4 @@
-package therapia.farm.domain;
+package therapia.farm.domain.crop;
 
 import lombok.Getter;
 import lombok.Setter;

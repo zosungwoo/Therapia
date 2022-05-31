@@ -1,4 +1,4 @@
-package therapia.farm.domain;
+package therapia.farm.domain.farm;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,9 +13,11 @@ public class Review {
     @Column(name = "review_id")
     private Long id;
 
+    private String nickname;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id")
-    private Users users;
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     private String title;
 
@@ -26,4 +28,5 @@ public class Review {
     private String contents;
 
     private Double rating;
+
 }

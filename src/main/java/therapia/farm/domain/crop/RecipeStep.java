@@ -1,4 +1,4 @@
-package therapia.farm.domain;
+package therapia.farm.domain.crop;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,20 +6,19 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "crop_recipe")
 @Getter @Setter
-public class CropRecipe {
+public class RecipeStep {
     @Id
     @GeneratedValue
-    @Column(name = "crop_recipe_id")
+    @Column(name = "recipe_step_id")
     private Long id;
+
+    private Long stepIdx;
+
+    private String cooking;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "crop_id")
-    private Crop crop;
 
 }

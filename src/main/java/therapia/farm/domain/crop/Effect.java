@@ -1,5 +1,4 @@
-package therapia.farm.domain;
-
+package therapia.farm.domain.crop;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,17 +10,11 @@ import javax.persistence.Id;
 
 @Entity
 @Getter @Setter
-public class Crop {
+public class Effect {
     @Id
     @GeneratedValue
-    @Column(name = "crop_id")
+    @Column(name = "effect_id")
     private Long id;
 
-    private String name;
-
-    private String season;
-
-    private String temperature;
-
-    private String storage;
+    private String effect;
 }
