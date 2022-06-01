@@ -19,6 +19,8 @@ public class Farm {
 
     private String name;
 
+    private String contents;
+
     @OneToMany(mappedBy = "farm", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
@@ -33,13 +35,6 @@ public class Farm {
     private Double location_x;
 
     private Double location_y;
-
-
-    // 농장 rating 업데이트 메서드 (리뷰가 추가/삭제 될 때 실행) -> 리뷰 서비스에서 해야할듯 ㅇㅇ
-//    public void updateReviewRating(Double reviewRating){
-//        this.reviewRating = reviewRating;
-//    }
-
 
     public void updateReviewRating(){
         Double rating = 0.0;

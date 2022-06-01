@@ -11,14 +11,11 @@ import therapia.farm.repository.crop.RecipeRepository;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class RecipeService {
 
     @Autowired
     private RecipeRepository recipeRepository;
-
-    @Autowired
-    private CropRepository cropRepository;
 
     public Long createRecipe(Recipe recipe){
         recipeRepository.save(recipe);
@@ -37,6 +34,6 @@ public class RecipeService {
 
     // 특정 작물을 이용한 레시피 조회
     public List<Recipe> findByCropId(Long cropId){
-        return cropRepository.findById(cropId).get().getRecipes();
+        return recipeRepository.findAllByCropId(cropId);
     }
 }
