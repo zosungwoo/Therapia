@@ -10,7 +10,7 @@ import therapia.farm.repository.crop.EffectRepository;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class EffectService {
 
     @Autowired
@@ -26,7 +26,7 @@ public class EffectService {
     }
 
     // 모든 효능 조회
-    public List<Effect> findCrops(){
+    public List<Effect> findEffects(){
         return effectRepository.findAll();  // 페이징도 가능
     }
 

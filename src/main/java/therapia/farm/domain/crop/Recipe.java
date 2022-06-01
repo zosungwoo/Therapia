@@ -15,6 +15,7 @@ public class Recipe {
     @Column(name = "recipe_id")
     private Long id;
 
+    private String name;
     private String ingredient;
 
     @ManyToOne(fetch = FetchType.LAZY)

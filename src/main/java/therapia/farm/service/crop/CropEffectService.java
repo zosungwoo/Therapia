@@ -14,12 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class CropEffectService {
 
     @Autowired
     private CropEffectRepository cropEffectRepository;
+    @Autowired
     private CropRepository cropRepository;
+    @Autowired
     private EffectRepository effectRepository;
 
     public Long createCropEffect(CropEffect cropEffect){
