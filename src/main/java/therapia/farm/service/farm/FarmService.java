@@ -11,13 +11,14 @@ import therapia.farm.repository.farm.FarmRepository;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class FarmService {
 
     @Autowired
     private FarmRepository farmRepository;
 
     // 농장 등록
+    @Transactional
     public Long createFarm(Farm farm){
         validateDuplicateMember(farm);
         farm.setReviewRating(0.0);  // 새로운 농장 Rating 0.0으로 설정
@@ -26,6 +27,7 @@ public class FarmService {
     }
 
     // 농장 업데이트 (변경 감지 이용)
+    @Transactional
     public void updateFarm(Long farmId, String name, FarmCategory category,
                            String phone, String address, String placeUrl, Double location_x, Double location_y){
         Farm tmp = new Farm();  // 중복 검사
@@ -42,6 +44,7 @@ public class FarmService {
         farm.setLocation_y(location_y);
     }
 
+    //농장 중복 검사
     private void validateDuplicateMember(Farm farm){
         List<Farm> findFarms = farmRepository.findAllByName(farm.getName());
         if (!findFarms.isEmpty()){
@@ -49,6 +52,8 @@ public class FarmService {
         }
     }
 
+    // 농장 삭제
+    @Transactional
     public void removeFarm(Long farmId){
         farmRepository.deleteById(farmId);
     }

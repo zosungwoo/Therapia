@@ -9,10 +9,11 @@ import therapia.farm.domain.farm.Review;
 import therapia.farm.repository.farm.FarmRepository;
 import therapia.farm.repository.farm.ReviewRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class ReviewService {
 
     @Autowired
@@ -21,24 +22,53 @@ public class ReviewService {
     @Autowired
     private FarmRepository farmRepository;
 
+    @Autowired
+    private FarmService farmService;
+    //농장 평점 업데이트
+    @Transactional
+    public void updateReviewRating(Long farmId, Double rating){
+        List<Review> reviewList = reviewRepository.findAllByfarmId(farmId);
+        Farm farm = farmService.findOne(farmId);
+        if (reviewList.size() == 0) {
+            farm.setReviewRating(rating);
+        } else {
+            Double ratingsum = 0.0;
+            int i = 0;
+            for(Review review : reviewList){
+                ratingsum += review.getRating();
+                i += 1;
+            }
+            Double avgReview = ratingsum / i;
+            farm.setReviewRating(avgReview);
+        }
+    }
+
     // 리뷰 등록
+    @Transactional
     public Long createReview(Review review){
         reviewRepository.save(review);
-        farmRepository.findById(review.getFarm().getId()).get().updateReviewRating();  // 농장의 Rating 없데이트!
+        Long farmId = farmRepository.findById(review.getFarm().getId()).get().getId();
+        updateReviewRating(farmId, review.getRating());// 농장의 Rating 업데이트!
         return review.getId();
     }
 
     // 리뷰 업데이트 (변경 감지 이용)
+    @Transactional
     public void updateReview(Long reviewId, String title, String contents, Double rating){
         Review review = reviewRepository.findById(reviewId).get();
         review.setTitle(title);
         review.setContents(contents);
         review.setRating(rating);
+        Long farmId = farmRepository.findById(review.getFarm().getId()).get().getId();
+        updateReviewRating(farmId, review.getRating());// 농장의 Rating 업데이트!
     }
 
     // 리뷰 삭제
+    @Transactional
     public void removeReview(Long reviewId){
+        Long farmId = reviewRepository.findById(reviewId).get().getFarm().getId();
         reviewRepository.deleteById(reviewId);
+        updateReviewRating(farmId, 0.0);
     }
 
     // 모든 리뷰 조회
@@ -53,8 +83,12 @@ public class ReviewService {
 
     // 농장 이름으로 조회
     public List<Review> findByFarmName(String name){
-        Farm farm = farmRepository.findByName(name);
-        return farm.getReviews();
+        Long farmId = farmRepository.findByName(name).getId();
+        List<Review> reviewList = reviewRepository.findAllByfarmId(farmId);
+        for(Review Reviews: reviewList) {
+            System.out.println(Reviews.getTitle());
+        }
+        return reviewList;
     }
 
 
