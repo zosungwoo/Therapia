@@ -2,6 +2,7 @@ package therapia.farm.domain.farm;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,22 +34,4 @@ public class Farm {
     private Double location_x;
 
     private Double location_y;
-
-
-    // 농장 rating 업데이트 메서드 (리뷰가 추가/삭제 될 때 실행) -> 리뷰 서비스에서 해야할듯 ㅇㅇ
-//    public void updateReviewRating(Double reviewRating){
-//        this.reviewRating = reviewRating;
-//    }
-
-
-    public void updateReviewRating(){
-        Double rating = 0.0;
-        int i = 0;
-        for(Review review : reviews){
-            rating += review.getRating();
-            i += 1;
-        }
-        if(i != 0)
-            reviewRating = rating / i;
-    }
 }
