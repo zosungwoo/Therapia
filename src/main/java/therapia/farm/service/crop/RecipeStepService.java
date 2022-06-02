@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class RecipeStepService {
 
     @Autowired
@@ -22,13 +22,14 @@ public class RecipeStepService {
         return recipeStep.getId();
     }
 
-    // 레시피 순서 단건 조회
+    // 레시피 아이디로 레시피 순서 조회
     public List<RecipeStep> findByRecipeId(Long recipeId){
         List<RecipeStep> tmp = recipeStepRepository.findAllByRecipeId(recipeId);
 
         RecipeStep []recipeSteps = new RecipeStep[tmp.size()];  // 레시피 순서에 맞게 배열하는 과정
-        for(RecipeStep recipeStep: recipeSteps){
-            int idx = recipeStep.getStepIdx().intValue()-1;
+        int idx;
+        for(RecipeStep recipeStep: tmp){
+            idx = recipeStep.getStepIdx().intValue()-1;
             recipeSteps[idx] = recipeStep;
         }
         return Arrays.asList(recipeSteps);

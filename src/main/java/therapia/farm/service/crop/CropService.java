@@ -9,7 +9,7 @@ import therapia.farm.repository.crop.CropRepository;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class CropService {
 
     @Autowired
