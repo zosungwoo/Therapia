@@ -64,8 +64,13 @@ public class FarmService {
     }
 
     // 단건 조회
-    public Farm findOne(Long farmId){
+    public Farm findById(Long farmId){
         return farmRepository.findById(farmId).get();
+    }
+
+    //카테고리가 같은 농장 조회
+    public List<Farm> findByCategory(FarmCategory farmCategory) {
+        return farmRepository.findAllByCategory(farmCategory);
     }
 
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.farm.Member;
+import therapia.farm.dto.farm.MemberDto;
 import therapia.farm.repository.farm.MemberRepository;
 
 import java.util.List;
@@ -17,9 +18,18 @@ public class MemberService {
 
     // 유저 생성
     @Transactional
-    public Long createMember(Member member){
-        memberRepository.save(member);
-        return member.getId();
+    public Long createMember(String nickname, String email){
+        Member newMember = new Member();
+        Member member = findMemberByEmail(email);
+        if(member == null ){
+            newMember.setEmail(email);
+            newMember.setNickname(nickname);
+            memberRepository.save(newMember);
+            return newMember.getId();
+        } else {
+            return member.getId();
+        }
+
     }
 
     // 유저 정보 업데이트
@@ -41,7 +51,7 @@ public class MemberService {
     }
 
     //회원 단건 조회
-    public Member findOne(Long memberId){
-        return memberRepository.getById(memberId);
+    public Member findMemberByEmail(String email){
+        return memberRepository.findMemberByEmail(email);
     }
 }
