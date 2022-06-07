@@ -44,9 +44,9 @@ public class ReviewServiceTest {
     public void 리뷰등록() throws Exception {
         //given
         Member member = new Member();
-        member.setNickname("정지연");
-        member.setEmail("wjdwldus2912@gmail.com");
-        Long memberId = memberService.createMember(member);
+        String nickname1 = "정지연";
+        String email1 = "wjdwldus2912@gmail.com";
+        Long memberId = memberService.createMember(nickname1,email1);
 
         Farm farm  = new Farm();
         farm.setAddress("충청남도 예산군 오가면 오촌리 318");
@@ -98,9 +98,9 @@ public class ReviewServiceTest {
     public void 리뷰_변경() throws Exception {
         //given
         Member member = new Member();
-        member.setNickname("정지연");
-        member.setEmail("wjdwldus2912@gmail.com");
-        Long memberId = memberService.createMember(member);
+        String nickname1 = "정지연";
+        String email1 = "wjdwldus2912@gmail.com";
+        Long memberId = memberService.createMember(nickname1,email1);
 
         Farm farm  = new Farm();
         farm.setAddress("충청남도 예산군 오가면 오촌리 318");
@@ -145,9 +145,9 @@ public class ReviewServiceTest {
     public void 리뷰삭제() throws Exception {
         //given
         Member member = new Member();
-        member.setNickname("정지연");
-        member.setEmail("wjdwldus2912@gmail.com");
-        Long memberId = memberService.createMember(member);
+        String nickname1 = "정지연";
+        String email1 = "wjdwldus2912@gmail.com";
+        Long memberId = memberService.createMember(nickname1,email1);
 
         Farm farm  = new Farm();
         farm.setAddress("충청남도 예산군 오가면 오촌리 318");
@@ -191,9 +191,9 @@ public class ReviewServiceTest {
     public void 농장이름으로_조회() throws Exception {
         //given
         Member member = new Member();
-        member.setNickname("정지연");
-        member.setEmail("wjdwldus2912@gmail.com");
-        Long memberId = memberService.createMember(member);
+        String nickname1 = "정지연";
+        String email1 = "wjdwldus2912@gmail.com";
+        Long memberId = memberService.createMember(nickname1,email1);
 
         Farm farm1 = new Farm();
         farm1.setAddress("충청남도 예산군 오가면 오촌리 318");
