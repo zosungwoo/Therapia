@@ -1,5 +1,6 @@
 package therapia.farm.domain.crop;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,7 @@ public class RecipeStep {
     private String cooking;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
