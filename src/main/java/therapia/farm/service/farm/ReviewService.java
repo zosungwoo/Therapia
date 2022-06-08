@@ -28,7 +28,7 @@ public class ReviewService {
     @Transactional
     public void updateReviewRating(Long farmId, Double rating){
         List<Review> reviewList = reviewRepository.findAllByfarmId(farmId);
-        Farm farm = farmService.findOne(farmId);
+        Farm farm = farmService.findById(farmId);
         if (reviewList.size() == 0) {
             farm.setReviewRating(rating);
         } else {

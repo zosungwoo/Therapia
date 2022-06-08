@@ -34,4 +34,6 @@ public class Farm {
     private Double location_x;
 
     private Double location_y;
+
+    private String contents;
 }

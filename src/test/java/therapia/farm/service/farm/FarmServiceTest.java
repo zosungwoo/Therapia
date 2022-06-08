@@ -91,4 +91,16 @@ public class FarmServiceTest {
         //then
         assertEquals(result.size(),0);
     }
+
+
+    @Test
+    public void 농장조회() throws Exception {
+        //given
+        Farm farm = farmService.findById(1L);
+
+        //when
+
+        //then
+        assertEquals(farm.getId(), 1L);
+    }
 }
