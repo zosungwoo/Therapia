@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.farm.Farm;
 import therapia.farm.domain.farm.Review;
 import therapia.farm.repository.farm.FarmRepository;
+import therapia.farm.repository.farm.MemberRepository;
 import therapia.farm.repository.farm.ReviewRepository;
 
 import java.util.Collections;
@@ -24,6 +25,10 @@ public class ReviewService {
 
     @Autowired
     private FarmService farmService;
+
+    @Autowired
+    private MemberService memberService;
+
     //농장 평점 업데이트
     @Transactional
     public void updateReviewRating(Long farmId, Double rating){
@@ -45,7 +50,14 @@ public class ReviewService {
 
     // 리뷰 등록
     @Transactional
-    public Long createReview(Review review){
+    public Long createReview(String nickname, Long member_Id, Long farm_Id, String title, String contents, Double rating){
+        Review review = new Review();
+        review.setNickname(nickname);
+        review.setMember(memberService.findMemberById(member_Id));
+        review.setFarm(farmService.findById(farm_Id));
+        review.setTitle(title);
+        review.setContents(contents);
+        review.setRating(rating);
         reviewRepository.save(review);
         Long farmId = farmRepository.findById(review.getFarm().getId()).get().getId();
         updateReviewRating(farmId, review.getRating());// 농장의 Rating 업데이트!
@@ -84,12 +96,12 @@ public class ReviewService {
     // 농장 이름으로 조회
     public List<Review> findByFarmName(String name){
         Long farmId = farmRepository.findByName(name).getId();
-        List<Review> reviewList = reviewRepository.findAllByfarmId(farmId);
-        for(Review Reviews: reviewList) {
-            System.out.println(Reviews.getTitle());
-        }
-        return reviewList;
+        return reviewRepository.findAllByfarmId(farmId);
     }
 
+    //농장 ID로 조회
+    public List<Review> findByFarmId(Long farmId) {
+        return reviewRepository.findAllByfarmId(farmId);
+    }
 
 }
