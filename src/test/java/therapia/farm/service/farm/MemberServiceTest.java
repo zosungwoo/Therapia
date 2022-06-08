@@ -34,11 +34,11 @@ public class MemberServiceTest {
     public void 회원가입() throws Exception {
         //given
         Member member = new Member();
-        member.setNickname("정지연");
-        member.setEmail("wjdwldus2912@gmail.com");
+        String nickname = "정지연";
+        String email = "wjdwldus2912@gmail.com";
 
         //when
-        Long saveId = memberService.createMember(member);
+        Long saveId = memberService.createMember(nickname, email);
 
         //then
         assertEquals(member, memberRepository.getById(saveId));
@@ -51,9 +51,7 @@ public class MemberServiceTest {
         Member member = new Member();
         String nickname = "정지연";
         String email = "jung_j_yeon@naver.com";
-        member.setNickname(nickname);
-        member.setEmail(email);
-        Long Id = memberService.createMember(member);
+        Long Id = memberService.createMember(nickname, email);
 
         //when
         String newNickname = "조성우";
@@ -67,10 +65,9 @@ public class MemberServiceTest {
     @Rollback(false)
     public void 유저삭제() throws Exception {
         //given
-        Member member = new Member();
-        member.setEmail("wjdwldus2912@gmail.com");
-        member.setNickname("정지연");
-        Long Id = memberService.createMember(member);
+        String nickname = "정지연";
+        String email = "wjdwldus2912@gmail.com";
+        Long Id = memberService.createMember(nickname, email);
 
         //when
         memberService.removeMember(Id);
@@ -84,15 +81,13 @@ public class MemberServiceTest {
     @Rollback(false)
     public void 회원전체_조회() throws Exception {
         //given
-        Member member1 = new Member();
-        member1.setEmail("wjdwldus2912@gmail.com");
-        member1.setNickname("정지연");
-        Long Id1 = memberService.createMember(member1);
+        String nickname1 = "정지연";
+        String email1 = "wjdwldus2912@gmail.com";
+        Long Id1 = memberService.createMember(nickname1, email1);
 
-        Member member2 = new Member();
-        member2.setEmail("chosungwoo@gmail.com");
-        member2.setNickname("조성우");
-        Long Id2 = memberService.createMember(member2);
+        String nickname2 = "조성우";
+        String email2 = "chosungwoo@gmail.com";
+        Long Id2 = memberService.createMember(nickname2, email2);
 
         //when
         List<Member> result = memberService.findMembers();
@@ -105,21 +100,19 @@ public class MemberServiceTest {
     @Rollback(false)
     public void 회원단건_조회() throws Exception {
         //given
-        Member member1 = new Member();
-        member1.setEmail("wjdwldus2912@gmail.com");
-        member1.setNickname("정지연");
-        Long Id1 = memberService.createMember(member1);
+        String nickname1 = "정지연";
+        String email1 = "wjdwldus2912@gmail.com";
+        Long Id1 = memberService.createMember(nickname1, email1);
 
-        Member member2 = new Member();
-        member2.setEmail("chosungwoo@gmail.com");
-        member2.setNickname("조성우");
-        Long Id2 = memberService.createMember(member2);
+        String nickname2 = "조성우";
+        String email2 = "chosungwoo@gmail.com";
+        Long Id2 = memberService.createMember(nickname2, email2);
 
         //when
-        Member findMember = memberService.findOne(Id1);
+        Member findMember = memberService.findMemberByEmail(email1);
 
         //then
-        assertEquals(findMember, member1);
+        assertEquals(findMember.getEmail(), email1);
     }
 
 }
