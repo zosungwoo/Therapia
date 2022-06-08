@@ -1,5 +1,8 @@
 package therapia.farm.domain.crop;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,9 +22,10 @@ public class Recipe {
     private String ingredient;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "crop_id")
     private Crop crop;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
-    private List<RecipeStep> recipeSteps = new ArrayList<>();
+    private List<RecipeStep> recipeSteps = new ArrayList<>()  ;
 }

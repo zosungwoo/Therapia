@@ -123,4 +123,9 @@ public class CropServiceTest {
         assertEquals(Arrays.asList(recipeStep1, recipeStep2), recipeSteps);
 
     }
+    @Test @Rollback(false)
+    public void 레시피조회2() throws Exception {  // 특정 작물로 레시피 조회 (1. 요리 이름, 2. 순서)
+
+        System.out.println(recipeService.findByCropId(1L).get(0).getRecipeSteps());
+    }
 }
