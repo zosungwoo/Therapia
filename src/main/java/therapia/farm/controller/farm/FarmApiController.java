@@ -23,7 +23,7 @@ public class FarmApiController {
     }
 
     @GetMapping("/api/farm/{category}")
-    public Result findbycategory(@PathVariable("category")FarmCategory farmCategory) {
+    public Result findbyCategory(@PathVariable("category")FarmCategory farmCategory) {
         return new Result(farmService.findByCategory(farmCategory));
     }
 
