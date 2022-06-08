@@ -14,11 +14,11 @@ public class CropEffect {
     @Column(name = "crop_effect_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "effect_id")
     private Effect effect;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "crop_id")
     private Crop crop;
 
