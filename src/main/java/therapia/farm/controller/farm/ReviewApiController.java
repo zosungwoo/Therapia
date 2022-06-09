@@ -20,7 +20,10 @@ public class ReviewApiController {
     private final MemberService memberService;
 
     @PostMapping("/api/review/add/{memberid}/{farmid}")
-    public Map<String, String> addReview(@PathVariable("memberid")Long member_Id, @PathVariable("farmid") Long farm_Id, @RequestBody Map<String,String> map) {
+    public Map<String, String> addReview(@PathVariable("memberid")Long member_Id, @PathVariable("farmid") Long farm_Id, @RequestBody Map<String,String> map) throws Exception{
+        if(memberService.findMemberById(member_Id) == null) {
+            throw new CustomException("존재하지 않는 사용자");
+        }
         String rating = map.get("rating");
         String title = map.get("title");
         String contents = map.get("contents");
@@ -34,7 +37,9 @@ public class ReviewApiController {
 
     @PutMapping("/api/review/update/{memberid}/{reviewid}")
     public void updateReview(@PathVariable("memberid")Long member_Id, @PathVariable("reviewid")Long review_Id, @RequestBody Map<String,String> map) throws Exception{
-        System.out.println(reviewService.findOne(review_Id));
+        if(memberService.findMemberById(member_Id) == null) {
+            throw new CustomException("존재하지 않는 사용자");
+        }
         if(reviewService.findOne(review_Id) == null){
             throw new CustomException("존재하지 않는 리뷰");
         }
