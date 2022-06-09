@@ -90,7 +90,7 @@ public class ReviewService {
 
     // 단건 조회
     public Review findOne(Long reviewId){
-        return reviewRepository.findById(reviewId).get();
+        return reviewRepository.findReviewById(reviewId);
     }
 
     // 농장 이름으로 조회

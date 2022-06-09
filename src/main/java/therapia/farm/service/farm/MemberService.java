@@ -60,6 +60,10 @@ public class MemberService {
     }
 
     public Member findMemberById(Long memberId){
-        return memberRepository.getById(memberId);
+        return memberRepository.findMemberById(memberId);
+    }
+
+    public Member findMemberByNickname(String nickname){
+        return memberRepository.findMemberByNickname(nickname);
     }
 }

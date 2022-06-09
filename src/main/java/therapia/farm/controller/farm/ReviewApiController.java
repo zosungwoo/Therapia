@@ -3,13 +3,16 @@ package therapia.farm.controller.farm;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
+import therapia.farm.exception.CustomException;
 import therapia.farm.service.farm.MemberService;
 import therapia.farm.service.farm.ReviewService;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Log4j2
 @RestController
 @RequiredArgsConstructor
 public class ReviewApiController {
@@ -29,16 +32,23 @@ public class ReviewApiController {
         return map1;
     }
 
-    @PostMapping("/api/review/update/{memberid}/{reviewid}")
-    public void updateReview(@PathVariable("memberid")Long member_Id, @PathVariable("memberid")Long review_Id, @RequestBody Map<String,String> map){
+    @PutMapping("/api/review/update/{memberid}/{reviewid}")
+    public void updateReview(@PathVariable("memberid")Long member_Id, @PathVariable("reviewid")Long review_Id, @RequestBody Map<String,String> map) throws Exception{
+        System.out.println(reviewService.findOne(review_Id));
+        if(reviewService.findOne(review_Id) == null){
+            throw new CustomException("존재하지 않는 리뷰");
+        }
         String rating = map.get("rating");
         String title = map.get("title");
         String contents = map.get("contents");
         reviewService.updateReview(review_Id, title, contents, Double.valueOf(rating));
     }
 
-    @PostMapping("/api/review/remove/{reviewid}")
-    public void removeReview(@PathVariable("reviewid")Long review_Id){
+    @DeleteMapping("/api/review/remove/{reviewid}")
+    public void removeReview(@PathVariable("reviewid")Long review_Id) throws Exception{
+        if(reviewService.findOne(review_Id) == null){
+            throw new CustomException("존재하지 않는 리뷰");
+        }
         reviewService.removeReview(review_Id);
     }
 
