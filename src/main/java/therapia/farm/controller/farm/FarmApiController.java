@@ -3,6 +3,7 @@ package therapia.farm.controller.farm;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,12 +13,13 @@ import therapia.farm.service.farm.FarmService;
 
 import javax.xml.transform.Result;
 
+@Log4j2
 @RestController
 @RequiredArgsConstructor
 public class FarmApiController {
     private final FarmService farmService;
 
-    @GetMapping("/api/farm/findall")
+    @GetMapping("/api/farm/farmList")
     public Result findAll() {
         return new Result(farmService.findFarms());
     }
