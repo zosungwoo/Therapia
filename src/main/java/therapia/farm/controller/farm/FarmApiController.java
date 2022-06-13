@@ -19,18 +19,18 @@ import javax.xml.transform.Result;
 public class FarmApiController {
     private final FarmService farmService;
 
-    @GetMapping("/api/farm/farmList")
-    public Result findAll() {
+    @GetMapping("/api/farm/findall")
+    public Result farmList() {
         return new Result(farmService.findFarms());
     }
 
     @GetMapping("/api/farm/{category}")
-    public Result findbyCategory(@PathVariable("category")FarmCategory farmCategory) {
+    public Result farmByCategory(@PathVariable("category")FarmCategory farmCategory) {
         return new Result(farmService.findByCategory(farmCategory));
     }
 
     @GetMapping("/api/farm/findone/{farmId}")
-    public Farm findbyId(@PathVariable("farmId")Long farm_Id) {
+    public Farm farmById(@PathVariable("farmId")Long farm_Id) {
         return farmService.findById(farm_Id);
     }
 

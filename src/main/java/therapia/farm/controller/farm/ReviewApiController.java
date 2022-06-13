@@ -63,12 +63,12 @@ public class ReviewApiController {
     }
 
     @GetMapping("/api/review/findone/{reviewid}")
-    public Result findReview (@PathVariable("reviewid")Long review_Id) {
+    public Result reviewByReviewId (@PathVariable("reviewid")Long review_Id) {
         return new Result(reviewService.findOne(review_Id));
     }
 
     @GetMapping("/api/review/findname/{farmid}")
-    public Result findReviewByFarmid (@PathVariable("farmid")Long farm_Id) {
+    public Result reviewByFarmId (@PathVariable("farmid")Long farm_Id) {
         return new Result(reviewService.findByFarmId(farm_Id));
     }
 
