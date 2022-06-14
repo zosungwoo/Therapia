@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import therapia.farm.domain.farm.Farm;
 import therapia.farm.domain.farm.Member;
 import therapia.farm.domain.farm.Review;
-import therapia.farm.repository.farm.ReviewRepository;
+import therapia.farm.domain.farm.repository.farm.ReviewRepository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;

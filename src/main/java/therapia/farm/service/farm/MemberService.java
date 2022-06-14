@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.farm.Member;
-import therapia.farm.dto.farm.MemberDto;
-import therapia.farm.repository.farm.MemberRepository;
+import therapia.farm.domain.farm.repository.farm.MemberRepository;
 
 import java.util.List;
 

@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.crop.Crop;
 import therapia.farm.domain.crop.CropEffect;
 import therapia.farm.domain.crop.Effect;
-import therapia.farm.repository.crop.CropEffectRepository;
-import therapia.farm.repository.crop.CropRepository;
-import therapia.farm.repository.crop.EffectRepository;
+import therapia.farm.domain.farm.repository.crop.CropEffectRepository;
+import therapia.farm.domain.farm.repository.crop.CropRepository;
+import therapia.farm.domain.farm.repository.crop.EffectRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class CropEffectService {
         return cropEffect.getId();
     }
 
-    // 작물로 효능 조회
+    // 작물로 증상 조회
     public List<Effect> findByCropId(Long cropId){
         List<CropEffect> cropEffects = cropEffectRepository.findAllByCropId(cropId);
         List<Effect> effects = new ArrayList<>();
@@ -40,7 +40,7 @@ public class CropEffectService {
         return effects;
     }
 
-    // 효능으로 작물 조회
+    // 증상으로 작물 조회
     public List<Crop> findByEffectId(Long effectId){
         List<CropEffect> cropEffects = cropEffectRepository.findAllByEffectId(effectId);
         List<Crop> crops = new ArrayList<>();

@@ -16,5 +16,7 @@ public class Effect {
     @Column(name = "effect_id")
     private Long id;
 
+    private String symptom;
+
     private String effect;
 }

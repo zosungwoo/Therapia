@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import therapia.farm.domain.farm.Farm;
-import therapia.farm.repository.farm.FarmRepository;
+import therapia.farm.domain.farm.repository.farm.FarmRepository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
