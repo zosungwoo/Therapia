@@ -6,11 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.farm.Farm;
 import therapia.farm.domain.farm.Review;
-import therapia.farm.repository.farm.FarmRepository;
-import therapia.farm.repository.farm.MemberRepository;
-import therapia.farm.repository.farm.ReviewRepository;
+import therapia.farm.domain.farm.repository.farm.FarmRepository;
+import therapia.farm.domain.farm.repository.farm.ReviewRepository;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service

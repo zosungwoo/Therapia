@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.crop.Crop;
-import therapia.farm.repository.crop.CropRepository;
+import therapia.farm.domain.farm.repository.crop.CropRepository;
 
 import java.util.List;
 

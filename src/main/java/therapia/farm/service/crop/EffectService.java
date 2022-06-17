@@ -3,9 +3,8 @@ package therapia.farm.service.crop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import therapia.farm.domain.crop.Crop;
 import therapia.farm.domain.crop.Effect;
-import therapia.farm.repository.crop.EffectRepository;
+import therapia.farm.domain.farm.repository.crop.EffectRepository;
 
 import java.util.List;
 

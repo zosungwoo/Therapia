@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.crop.RecipeStep;
-import therapia.farm.repository.crop.RecipeStepRepository;
+import therapia.farm.domain.farm.repository.crop.RecipeStepRepository;
 
 import java.util.Arrays;
 import java.util.List;

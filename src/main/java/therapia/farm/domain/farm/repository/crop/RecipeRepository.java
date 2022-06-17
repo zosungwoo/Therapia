@@ -1,4 +1,4 @@
-package therapia.farm.repository.crop;
+package therapia.farm.domain.farm.repository.crop;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

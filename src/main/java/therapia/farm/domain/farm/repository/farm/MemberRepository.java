@@ -1,4 +1,4 @@
-package therapia.farm.repository.farm;
+package therapia.farm.domain.farm.repository.farm;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import therapia.farm.domain.farm.Member;
