@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://therapia-1.cgtyvvaod34a.ap-northeast-2.rds.amazonaws.com:3306/board?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://therapia-1.cgtyvvaod34a.ap-northeast-2.rds.amazonaws.com:3306/therapiadb
     username: root
     password: 12345678
   jpa:
