@@ -1,8 +1,8 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://therapia-1.cgtyvvaod34a.ap-northeast-2.rds.amazonaws.com:3306/therapiadb
-    username: root
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://therapia-db.cgtyvvaod34a.ap-northeast-2.rds.amazonaws.com:3306/therapia
+    username: therapia
     password: 12345678
   jpa:
     show-sql: true
@@ -14,4 +14,6 @@ spring:
       format_sql: true
 logging.level:
   org.hibernate.SQL: debug
+server:
+  port : 80
 # org.hibernate.type: trace
