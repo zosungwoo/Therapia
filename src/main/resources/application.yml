@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://therapia-db.cgtyvvaod34a.ap-northeast-2.rds.amazonaws.com:3306/therapia
+    url: jdbc:mariadb://therapia-db.cgtyvvaod34a.ap-northeast-2.rds.amazonaws.com:3306/therapia
     username: therapia
     password: 12345678
   jpa:
