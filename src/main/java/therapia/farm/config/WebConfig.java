@@ -16,7 +16,6 @@ public class WebConfig implements WebMvcConfigurer {
                         HttpMethod.POST.name(),
                         HttpMethod.PUT.name(),
                         HttpMethod.DELETE.name())
-                .allowedOrigins("*")
                 .allowedOriginPatterns("*") //모든 origin 허용
                 .allowCredentials(true);
     }
