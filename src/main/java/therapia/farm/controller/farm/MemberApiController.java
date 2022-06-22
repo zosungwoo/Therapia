@@ -26,8 +26,9 @@ public class MemberApiController {
             }
         }
 
-        Long id = memberService.createMember(nickname,email);
+        Long memberId = memberService.createMember(nickname,email);
         Map<String, String> map1 = new HashMap<>();
+        map1.put("memberid", memberId.toString());
         return map1;
     }
 
