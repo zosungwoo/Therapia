@@ -20,14 +20,14 @@ public class MemberApiController {
     public Map<String, String> addMember(@RequestBody Map<String,String> map) throws Exception {
         String nickname = map.get("nickname");
         String email = map.get("email");
-
-        if(memberService.findMemberByNickname(nickname) != null) {
-            throw new CustomException("존재하는 닉네임");
+        if(memberService.findMemberByEmail(email) == null) {
+            if(memberService.findMemberByNickname(nickname) != null) {
+                throw new CustomException("존재하는 닉네임");
+            }
         }
+
         Long id = memberService.createMember(nickname,email);
         Map<String, String> map1 = new HashMap<>();
-        map1.put("memberid", id.toString());
-        System.out.println(map1);
         return map1;
     }
 
