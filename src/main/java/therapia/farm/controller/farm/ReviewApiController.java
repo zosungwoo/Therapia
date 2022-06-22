@@ -31,7 +31,6 @@ public class ReviewApiController {
         Long reviewId = reviewService.createReview(nickname, member_Id, farm_Id, title, contents, Double.valueOf(rating));
         Map<String, String> map1 = new HashMap<>();
         map1.put("reviewid", reviewId.toString());
-        System.out.println(map1);
         return map1;
     }
 
