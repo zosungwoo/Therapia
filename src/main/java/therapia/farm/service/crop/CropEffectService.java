@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.crop.Crop;
 import therapia.farm.domain.crop.CropEffect;
 import therapia.farm.domain.crop.Effect;
-import therapia.farm.domain.farm.repository.crop.CropEffectRepository;
-import therapia.farm.domain.farm.repository.crop.CropRepository;
-import therapia.farm.domain.farm.repository.crop.EffectRepository;
+import therapia.farm.repository.crop.CropEffectRepository;
+import therapia.farm.repository.crop.CropRepository;
+import therapia.farm.repository.crop.EffectRepository;
 
 import java.util.ArrayList;
 import java.util.List;
