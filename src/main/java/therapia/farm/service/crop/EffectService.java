@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.crop.Effect;
 import therapia.farm.repository.crop.EffectRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,5 +29,6 @@ public class EffectService {
     public List<Effect> findEffects(){
         return effectRepository.findAll();  // 페이징도 가능
     }
+
 
 }

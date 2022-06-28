@@ -50,4 +50,15 @@ public class CropEffectService {
         }
         return crops;
     }
+
+    public List findEffect(Long cropId) {
+        List<Effect> effectList = findByCropId(cropId);
+        List effects = new ArrayList<>();
+
+        for (int i=0; i<effectList.size(); i++) {
+            effects.add(effectList.get(i).getEffect());
+        }
+
+        return effects;
+    }
 }

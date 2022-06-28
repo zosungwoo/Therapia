@@ -32,7 +32,7 @@ public class RecipeService {
     }
 
     // 특정 작물을 이용한 레시피 조회
-    public List<Recipe> findByCropId(Long cropId){
+    public List<Recipe> findRecipeByCropId(Long cropId){
         return recipeRepository.findAllByCropId(cropId);
     }
 }
