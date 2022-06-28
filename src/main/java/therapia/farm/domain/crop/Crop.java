@@ -28,4 +28,5 @@ public class Crop {
 
     @OneToMany(mappedBy = "crop", cascade = CascadeType.ALL)
     private List<Recipe> recipes = new ArrayList<>();
+
 }

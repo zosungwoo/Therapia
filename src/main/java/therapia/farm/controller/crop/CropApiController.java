@@ -29,6 +29,11 @@ public class CropApiController {
         return new Result(cropEffectService.findByEffectId(id));
     }
 
+    @GetMapping("/api/cropList/{cropId}")
+    public Result cropByCropList(@PathVariable("cropId") Long id){
+        return new Result(cropService.findCropDto(id));
+    }
+
     @GetMapping("/api/effect/findall")
     public Result effectList(){
         return new Result(effectService.findEffects());
@@ -41,7 +46,7 @@ public class CropApiController {
 
     @GetMapping("/api/recipe/{cropId}")
     public Result recipeByCrop(@PathVariable("cropId") Long id){
-        return new Result(recipeService.findByCropId(id));
+        return new Result(recipeService.findRecipeByCropId(id));
     }
 
     @GetMapping("/api/recipe/step/{recipeId}")

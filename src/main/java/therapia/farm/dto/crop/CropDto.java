@@ -2,6 +2,9 @@ package therapia.farm.dto.crop;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import therapia.farm.domain.crop.Crop;
+import therapia.farm.domain.crop.Effect;
+import therapia.farm.domain.crop.Recipe;
 
 import java.util.List;
 
@@ -12,17 +15,17 @@ public class CropDto {
     private String season;
     private String temperature;
     private String storage;
-    private List<EffectDto> effectList;
-    private List<RecipeDto> recipeList;
+    private List effects;
+    private List<Recipe> recipe;
 
-    public static CropDto of (CropDto c, List<EffectDto> effectDtoList, List<RecipeDto> recipeDtoList) {
+    public static CropDto of (Crop c, List<Effect> effects, List<Recipe> recipe) {
         return new CropDto(
                 c.getName(),
                 c.getSeason(),
                 c.getTemperature(),
                 c.getStorage(),
-                effectDtoList,
-                recipeDtoList
+                effects,
+                recipe
         );
     }
 }
