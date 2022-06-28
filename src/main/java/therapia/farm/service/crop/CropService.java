@@ -7,7 +7,9 @@ import therapia.farm.domain.crop.Crop;
 import therapia.farm.domain.crop.Effect;
 import therapia.farm.domain.crop.Recipe;
 import therapia.farm.dto.crop.CropDto;
+import therapia.farm.repository.crop.CropEffectRepository;
 import therapia.farm.repository.crop.CropRepository;
+import therapia.farm.repository.crop.EffectRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +27,6 @@ public class CropService {
     @Autowired
     private RecipeService recipeService;
 
-    @Autowired
-    private EffectService effectService;
-
     public Long createCrop(Crop crop){
         cropRepository.save(crop);
         return crop.getId();
@@ -42,13 +41,17 @@ public class CropService {
         return cropRepository.findAll();  // 페이징도 가능
     }
 
-    public CropDto findCropDto (Long cropId) {
-        List effects = cropEffectService.findEffect(cropId);
-        Crop c = cropRepository.findById(cropId).get();
-        List<Recipe> recipes = recipeService.findRecipeByCropId(cropId);
-        CropDto cropDto = CropDto.of(c, effects, recipes);
+    public List<CropDto> findCropDto (Long effectId) {
+        List<Crop> cropList = cropEffectService.findByEffectId(effectId);
+        List<CropDto> cropDtoList = new ArrayList<>();
+        cropList.forEach(c -> {
+            List effects = cropEffectService.findEffect(c.getId());
+            List<Recipe> recipes = recipeService.findRecipeByCropId(c.getId());
+            CropDto cd =  CropDto.of(c,effects,recipes);
+            cropDtoList.add(cd);
+        });
 
-        return cropDto;
+        return cropDtoList;
     }
 
 

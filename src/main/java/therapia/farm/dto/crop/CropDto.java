@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class CropDto {
+    private Long cropid;
     private String name;
     private String season;
     private String temperature;
@@ -20,6 +21,7 @@ public class CropDto {
 
     public static CropDto of (Crop c, List<Effect> effects, List<Recipe> recipe) {
         return new CropDto(
+                c.getId(),
                 c.getName(),
                 c.getSeason(),
                 c.getTemperature(),

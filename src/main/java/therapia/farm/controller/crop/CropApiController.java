@@ -29,8 +29,8 @@ public class CropApiController {
         return new Result(cropEffectService.findByEffectId(id));
     }
 
-    @GetMapping("/api/cropList/{cropId}")
-    public Result cropByCropList(@PathVariable("cropId") Long id){
+    @GetMapping("/api/cropList/{effectId}")
+    public Result cropByCropList(@PathVariable("effectId") Long id){
         return new Result(cropService.findCropDto(id));
     }
 
