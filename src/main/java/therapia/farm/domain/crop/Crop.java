@@ -17,16 +17,13 @@ public class Crop {
     @GeneratedValue
     @Column(name = "crop_id")
     private Long id;
-
     private String name;
-
     private String season;
-
     private String temperature;
-
     private String storage;
-
     @OneToMany(mappedBy = "crop", cascade = CascadeType.ALL)
     private List<Recipe> recipes = new ArrayList<>();
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "crop", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CropEffect> cropEffectList = new ArrayList<>();
 }
