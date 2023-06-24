@@ -29,19 +29,17 @@ public class ReviewService {
 
     //농장 평점 업데이트
     @Transactional
-    public void updateReviewRating(Long farmId, Double rating){
+    public void updateReviewRating(Long farmId){
         List<Review> reviewList = reviewRepository.findAllByfarmId(farmId);
         Farm farm = farmService.findById(farmId);
         if (reviewList.size() == 0) {
-            farm.setReviewRating(rating);
+            farm.setReviewRating(0.0);
         } else {
             Double ratingsum = 0.0;
-            int i = 0;
             for(Review review : reviewList){
                 ratingsum += review.getRating();
-                i += 1;
             }
-            Double avgReview = ratingsum / i;
+            Double avgReview = ratingsum / reviewList.size();
             farm.setReviewRating(avgReview);
         }
     }
@@ -57,8 +55,8 @@ public class ReviewService {
         review.setContents(contents);
         review.setRating(rating);
         reviewRepository.save(review);
-        Long farmId = farmRepository.findById(review.getFarm().getId()).get().getId();
-        updateReviewRating(farmId, review.getRating());// 농장의 Rating 업데이트!
+
+        updateReviewRating(farm_Id);// 농장의 Rating 업데이트!
         return review.getId();
     }
 
@@ -69,8 +67,8 @@ public class ReviewService {
         review.setTitle(title);
         review.setContents(contents);
         review.setRating(rating);
-        Long farmId = farmRepository.findById(review.getFarm().getId()).get().getId();
-        updateReviewRating(farmId, review.getRating());// 농장의 Rating 업데이트!
+        Long farmId = review.getFarm().getId();
+        updateReviewRating(farmId);// 농장의 Rating 업데이트!
     }
 
     // 리뷰 삭제
@@ -78,7 +76,7 @@ public class ReviewService {
     public void removeReview(Long reviewId){
         Long farmId = reviewRepository.findById(reviewId).get().getFarm().getId();
         reviewRepository.deleteById(reviewId);
-        updateReviewRating(farmId, 0.0);
+        updateReviewRating(farmId);
     }
 
     // 모든 리뷰 조회

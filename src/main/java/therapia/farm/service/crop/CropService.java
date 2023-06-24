@@ -45,9 +45,9 @@ public class CropService {
         List<Crop> cropList = cropEffectService.findByEffectId(effectId);
         List<CropDto> cropDtoList = new ArrayList<>();
         cropList.forEach(c -> {
-            List effects = cropEffectService.findEffect(c.getId());
+            List<Effect> effects = cropEffectService.findByCropId(c.getId());
             List<Recipe> recipes = recipeService.findRecipeByCropId(c.getId());
-            CropDto cd =  CropDto.of(c,effects,recipes);
+            CropDto cd = CropDto.of(c,effects,recipes);
             cropDtoList.add(cd);
         });
 

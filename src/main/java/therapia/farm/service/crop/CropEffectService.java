@@ -35,7 +35,7 @@ public class CropEffectService {
         List<Effect> effects = new ArrayList<>();
 
         for (CropEffect cropEffect: cropEffects) {
-            effects.add(effectRepository.findById(cropEffect.getEffect().getId()).get());
+            effects.add(cropEffect.getEffect());
         }
         return effects;
     }
@@ -46,19 +46,8 @@ public class CropEffectService {
         List<Crop> crops = new ArrayList<>();
 
         for (CropEffect cropEffect: cropEffects) {
-            crops.add(cropRepository.findById(cropEffect.getCrop().getId()).get());
+            crops.add(cropEffect.getCrop());
         }
         return crops;
-    }
-
-    public List findEffect(Long cropId) {
-        List<Effect> effectList = findByCropId(cropId);
-        List effects = new ArrayList<>();
-
-        for (int i=0; i<effectList.size(); i++) {
-            effects.add(effectList.get(i).getEffect());
-        }
-
-        return effects;
     }
 }
