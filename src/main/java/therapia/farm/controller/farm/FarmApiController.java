@@ -32,13 +32,13 @@ public class FarmApiController {
 
     @ApiOperation(value = "카테고리별 농장 가져오기", notes = "카테고리 값으로 농장 List 가져오기")
     @GetMapping("/api/farms/category/{category}")
-    public ResponseEntity<?> farmByCategory(@PathVariable("category")FarmCategory farmCategory) {
+    public ResponseEntity<List<FarmDto>> farmByCategory(@PathVariable("category")FarmCategory farmCategory) {
         return new ResponseEntity<>(farmService.findByCategory(farmCategory), HttpStatus.OK);
     }
 
     @ApiOperation(value = "농장 가져오기", notes = "농장 ID로 농장 가져오기")
     @GetMapping("/api/farms/{farmId}")
-    public ResponseEntity<?> farmById(@PathVariable("farmId")Long farm_Id) {
+    public ResponseEntity<FarmDto> farmById(@PathVariable("farmId")Long farm_Id) {
         return new ResponseEntity<>(farmService.findById(farm_Id), HttpStatus.OK);
     }
 }

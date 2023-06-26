@@ -102,11 +102,12 @@ public class ReviewService {
     }
 
     //농장 ID로 조회
-    public ReviewResponseDto findByFarmId(Long farmId) {
+    public List<ReviewResponseDto> findByFarmId(Long farmId) {
         if (reviewRepository.findReviewByFarmId(farmId).isEmpty()) {
             throw new CustomException("존재하지 않는 농장");
         }
-        return new ReviewResponseDto(reviewRepository.findReviewByFarmId(farmId).get());
+        List<Review> reviewList = reviewRepository.findAllByFarmId(farmId);
+        return reviewList.stream().map(ReviewResponseDto::new).collect(Collectors.toList());
     }
 
 }

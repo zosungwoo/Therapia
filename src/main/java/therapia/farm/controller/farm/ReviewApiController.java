@@ -11,6 +11,8 @@ import therapia.farm.dto.farm.ReviewRequestDto;
 import therapia.farm.dto.farm.ReviewResponseDto;
 import therapia.farm.service.farm.ReviewService;
 
+import java.util.List;
+
 @Api(tags = {"Review API"})
 @Log4j2
 @RestController
@@ -20,7 +22,7 @@ public class ReviewApiController {
     @ApiOperation(value = "리뷰 생성",
             notes = "개별 리뷰 생성")
     @PostMapping("/api/members/{memberid}/farms/{farmid}/reviews")
-    public ResponseEntity<?> addReview(@PathVariable("memberid")Long memberId,
+    public ResponseEntity<ReviewResponseDto> addReview(@PathVariable("memberid")Long memberId,
                                        @PathVariable("farmid") Long farmId,
                                        @RequestBody ReviewRequestDto requestDto) {
         ReviewResponseDto reviewResponseDto = reviewService.createReview(requestDto, memberId, farmId);
@@ -30,7 +32,7 @@ public class ReviewApiController {
     @ApiOperation(value = "리뷰 업데이트",
             notes = "개별 리뷰 업데이트")
     @PutMapping("/api/review/update/{memberid}/{reviewid}")
-    public ResponseEntity<?> updateReview(@PathVariable("memberid")Long memberId, @PathVariable("reviewid")Long reviewId, @RequestBody ReviewRequestDto requestDto) {
+    public ResponseEntity<ReviewResponseDto> updateReview(@PathVariable("memberid")Long memberId, @PathVariable("reviewid")Long reviewId, @RequestBody ReviewRequestDto requestDto) {
         ReviewResponseDto reviewResponseDto = reviewService.updateReview(requestDto, reviewId, memberId);
         return new ResponseEntity<>(reviewResponseDto, HttpStatus.OK);
     }
@@ -45,21 +47,21 @@ public class ReviewApiController {
     @ApiOperation(value = "리뷰 가져오기",
             notes = "리뷰 ID로 리뷰 가져오기")
     @GetMapping("/api/reviews/{reviewid}")
-    public ResponseEntity<?> reviewByReviewId (@PathVariable("reviewid")Long reviewId) {
+    public ResponseEntity<ReviewResponseDto> reviewByReviewId (@PathVariable("reviewid")Long reviewId) {
         return new ResponseEntity<>(reviewService.findOne(reviewId), HttpStatus.OK);
     }
 
     @ApiOperation(value = "모든 리뷰 가져오기",
             notes = "모든 리뷰 List 가져오기")
     @GetMapping("/api/reviews")
-    public ResponseEntity<?> findAllReviews() {
+    public ResponseEntity<List<ReviewResponseDto>> findAllReviews() {
         return new ResponseEntity<>(reviewService.findReviews(), HttpStatus.OK);
     }
 
     @ApiOperation(value = "농장의 리뷰 가져오기",
             notes = "농장 ID로 리뷰 List 가져오기")
     @GetMapping("/api/farms/{farmid}/reviews")
-    public ResponseEntity<?> reviewByFarmId (@PathVariable("farmid")Long farmId) {
+    public ResponseEntity<List<ReviewResponseDto>> reviewByFarmId (@PathVariable("farmid")Long farmId) {
         return new ResponseEntity<>(reviewService.findByFarmId(farmId), HttpStatus.OK);
     }
 }
