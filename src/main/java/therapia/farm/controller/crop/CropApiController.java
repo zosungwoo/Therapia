@@ -34,12 +34,12 @@ public class CropApiController {
 
     @ApiOperation(value = "효능에 따른 작물 가져오기",
             notes = "효능 ID로 작물 List 가져오기\n" +
-                    "'?include_effects_recipes=true' 쿼리 스트링 포함 시 효능과 레시피 포함하여 가져오기 (기존의 cropList/{effect_id}와 같은 기능)")
+                    "'?include_effects=true' 쿼리 스트링 포함 시 효능 포함하여 가져오기 (기존의 cropList/{effect_id}와 같은 기능)")
     @GetMapping("/api/effects/{effectId}/crops")
     public ResponseEntity<?> cropByEffectList(@PathVariable("effectId") Long id,
-                                   @RequestParam(value = "include_effects_recipes", defaultValue = "false") boolean includeEffectRecipe){
+                                   @RequestParam(value = "include_effects", defaultValue = "false") boolean includeEffectRecipe){
         if(includeEffectRecipe)
-            return new ResponseEntity<>(effectService.findCropEffectRecipeByEffectId(id), HttpStatus.OK);
+            return new ResponseEntity<>(effectService.findCropEffect(id), HttpStatus.OK);
         else
             return new ResponseEntity<>(cropEffectService.findByEffectId(id), HttpStatus.OK);
     }
