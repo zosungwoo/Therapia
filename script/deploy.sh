@@ -1,4 +1,5 @@
 #!/bin/bash
+./gradlew build
 rm /home/ubuntu/farm_backend/deploy.log
 BUILD_JAR=$(ls /home/ubuntu/farm_backend/build/libs/farm-0.0.1-SNAPSHOT.jar)
 JAR_NAME=$(basename $BUILD_JAR)
