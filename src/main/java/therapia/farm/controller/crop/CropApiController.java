@@ -37,8 +37,8 @@ public class CropApiController {
                     "'?include_effects=true' 쿼리 스트링 포함 시 효능 포함하여 가져오기 (기존의 cropList/{effect_id}와 같은 기능)")
     @GetMapping("/api/effects/{effectId}/crops")
     public ResponseEntity<?> cropByEffectList(@PathVariable("effectId") Long id,
-                                   @RequestParam(value = "include_effects", defaultValue = "false") boolean includeEffectRecipe){
-        if(includeEffectRecipe)
+                                   @RequestParam(value = "include_effects", defaultValue = "false") boolean includeEffect){
+        if(includeEffect)
             return new ResponseEntity<>(effectService.findCropEffect(id), HttpStatus.OK);
         else
             return new ResponseEntity<>(cropEffectService.findByEffectId(id), HttpStatus.OK);
