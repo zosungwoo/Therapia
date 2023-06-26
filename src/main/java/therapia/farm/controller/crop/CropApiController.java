@@ -2,15 +2,18 @@ package therapia.farm.controller.crop;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import therapia.farm.dto.crop.CropDto;
+import therapia.farm.dto.crop.EffectDto;
+import therapia.farm.dto.crop.RecipeDto;
+import therapia.farm.dto.crop.RecipeStepDto;
 import therapia.farm.service.crop.*;
+
+import java.util.List;
 
 @Api(tags = {"Crop API"})
 @Log4j2
@@ -25,53 +28,44 @@ public class CropApiController {
 
     @ApiOperation(value = "모든 작물 가져오기", notes = "모든 작물 List 가져오기")
     @GetMapping("/api/crops")
-    public Result cropList(){
-        return new Result(cropService.findCrops());
+    public ResponseEntity<List<CropDto>> cropList(){
+        return new ResponseEntity<>(cropService.findCrops(), HttpStatus.OK);
     }
 
     @ApiOperation(value = "효능에 따른 작물 가져오기",
             notes = "효능 ID로 작물 List 가져오기\n" +
                     "'?include_effects_recipes=true' 쿼리 스트링 포함 시 효능과 레시피 포함하여 가져오기 (기존의 cropList/{effect_id}와 같은 기능)")
     @GetMapping("/api/effects/{effectId}/crops")
-    public Result cropByEffectList(@PathVariable("effectId") Long id,
+    public ResponseEntity<?> cropByEffectList(@PathVariable("effectId") Long id,
                                    @RequestParam(value = "include_effects_recipes", defaultValue = "false") boolean includeEffectRecipe){
         if(includeEffectRecipe)
-            return new Result(cropService.findCropDto(id));
+            return new ResponseEntity<>(effectService.findCropEffectRecipeByEffectId(id), HttpStatus.OK);
         else
-            return new Result(cropEffectService.findByEffectId(id));
+            return new ResponseEntity<>(cropEffectService.findByEffectId(id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "모든 효능 가져오기", notes = "모든 효능 List 가져오기")
     @GetMapping("/api/effects")
-    public Result effectList(){
-        return new Result(effectService.findEffects());
+    public ResponseEntity<List<EffectDto>> effectList(){
+        return new ResponseEntity<>(effectService.findEffects(), HttpStatus.OK);
     }
 
     @ApiOperation(value = "작물의 효능 가져오기", notes = "작물 ID로 효능 List 가져오기")
     @GetMapping("/api/crops/{cropId}/effects")
-    public Result effectByCrop(@PathVariable("cropId") Long id){
-        return new Result(cropEffectService.findByCropId(id));
+    public ResponseEntity<List<EffectDto>> effectByCrop(@PathVariable("cropId") Long id){
+        return new ResponseEntity<>(cropEffectService.findByCropId(id), HttpStatus.OK);
     }
 
 
     @ApiOperation(value = "작물을 활용한 레시피 가져오기", notes = "작물 ID로 레시피 List 가져오기")
     @GetMapping("/api/crops/{cropId}/recipes")
-    public Result recipeByCrop(@PathVariable("cropId") Long id){
-        return new Result(recipeService.findRecipeByCropId(id));
+    public ResponseEntity<List<RecipeDto>> recipeByCrop(@PathVariable("cropId") Long id){
+        return new ResponseEntity<>(recipeService.findRecipeByCropId(id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "레시피의 요리 순서(Step) 가져오기", notes = "레시피 ID로 레시피의 요리 순서(Step) List로 가져오기")
     @GetMapping("/api/recipes/{recipeId}/steps")
-    public Result recipeStepByRecipe(@PathVariable("recipeId") Long id){
-        return new Result(recipeStepService.findByRecipeId(id));
+    public ResponseEntity<List<RecipeStepDto>> recipeStepByRecipe(@PathVariable("recipeId") Long id){
+        return new ResponseEntity<>(recipeStepService.findByRecipeId(id), HttpStatus.OK);
     }
-
-
-    @Data
-    @AllArgsConstructor
-    static class Result<T>{
-        private T data;
-    }
-
-
 }

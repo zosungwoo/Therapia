@@ -1,41 +1,52 @@
 package therapia.farm.service.farm;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import therapia.farm.domain.farm.Member;
+import therapia.farm.dto.farm.MemberRequestDto;
+import therapia.farm.dto.farm.MemberResponseDto;
+import therapia.farm.dto.farm.MemberUpdateDto;
+import therapia.farm.exception.CustomException;
 import therapia.farm.repository.farm.MemberRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class MemberService {
-
-    @Autowired
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     // 유저 생성
     @Transactional
-    public Long createMember(String nickname, String email){
-        Member newMember = new Member();
-        Member member = findMemberByEmail(email);
-        if(member == null ){
-            newMember.setEmail(email);
-            newMember.setNickname(nickname);
-            memberRepository.save(newMember);
-            return newMember.getId();
+    public MemberResponseDto createMember(MemberRequestDto memberRequestDto){
+        Optional<Member> member = memberRepository.findMemberByEmail(memberRequestDto.getEmail());
+        if(member.isEmpty()){
+            if (memberRepository.findMemberByEmail(memberRequestDto.getEmail()).isPresent()) {
+                throw new CustomException("존재하는 이메일");
+            }
+            if (memberRepository.findMemberByNickname(memberRequestDto.getNickname()).isPresent()) {
+                throw new CustomException("존재하는 닉네임");
+            }
+            Member newMember = memberRepository.save(MemberRequestDto.toEntity(memberRequestDto));
+            return new MemberResponseDto(newMember);
         } else {
-            return member.getId();
+            return new MemberResponseDto(member.get());
         }
-
     }
 
     // 유저 정보 업데이트
     @Transactional
-    public void updateMember(Long memberId, String nickname){
-        Member member = memberRepository.findById(memberId).get();
-        member.setNickname(nickname);
+    public MemberResponseDto updateMember(MemberUpdateDto memberRequestDto){
+        if (memberRepository.findMemberByNickname(memberRequestDto.getNickname()).isPresent()) {
+            throw new CustomException("존재하는 닉네임");
+        }
+        Member member = memberRepository.getById(memberRequestDto.getId());
+        member.updateNickname(memberRequestDto.getNickname());
+
+        return new MemberResponseDto(member);
     }
 
     // 유저 삭제
@@ -47,22 +58,5 @@ public class MemberService {
     // 유저 조회
     public List<Member> findMembers(){
         return memberRepository.findAll();
-    }
-
-    //회원 단건 조회
-    public Member findMemberByEmail(String email){
-        return memberRepository.findMemberByEmail(email);
-    }
-
-    public String findNicknameById(Long memberId) {
-        return memberRepository.getById(memberId).getNickname();
-    }
-
-    public Member findMemberById(Long memberId){
-        return memberRepository.findMemberById(memberId);
-    }
-
-    public Member findMemberByNickname(String nickname){
-        return memberRepository.findMemberByNickname(nickname);
     }
 }

@@ -1,21 +1,29 @@
 package therapia.farm.domain.farm;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@NoArgsConstructor
 public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
-
-//    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-//    private List<Review> reviews = new ArrayList<>();
-
     private String nickname;
-
     private String email;
+
+    @Builder
+    public Member(String nickname, String email) {
+        this.nickname = nickname;
+        this.email = email;
+    }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }

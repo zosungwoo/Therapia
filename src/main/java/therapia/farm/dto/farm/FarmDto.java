@@ -1,36 +1,36 @@
 package therapia.farm.dto.farm;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import therapia.farm.domain.farm.Farm;
 import therapia.farm.domain.farm.FarmCategory;
+import therapia.farm.domain.farm.Review;
 
 import java.util.List;
-
-@Data
-@AllArgsConstructor
+@Getter
 public class FarmDto {
-    private String name;
-    private FarmCategory category;
-    private Double reviewRating;
-    private String phone;
-    private String address;
-    private String placeUrl;
-    private Double location_x;
-    private Double location_y;
-    private List<ReviewDto> reviewList;
+    private final Long id;
+    private final FarmCategory category;
+    private final String name;
+    private final List<Review> reviews;
+    private final Double reviewRating;
+    private final String phone;
+    private final String address;
+    private final String placeUrl;
+    private final Double location_x;
+    private final Double location_y;
+    private final String contents;
 
-    public static FarmDto of (Farm f, List<ReviewDto> reviewDtoList) {
-        return new FarmDto(
-                f.getName(),
-                f.getCategory(),
-                f.getReviewRating(),
-                f.getPhone(),
-                f.getAddress(),
-                f.getPlaceUrl(),
-                f.getLocation_x(),
-                f.getLocation_y(),
-                reviewDtoList
-        );
+    public FarmDto(Farm farm) {
+        this.id = farm.getId();
+        this.category = farm.getCategory();
+        this.name = farm.getName();;
+        this.reviews = farm.getReviews();
+        this.reviewRating = farm.getReviewRating();
+        this.phone = farm.getPhone();
+        this.address = farm.getAddress();
+        this.placeUrl = farm.getPlaceUrl();
+        this.location_x = farm.getLocation_x();
+        this.location_y = farm.getLocation_y();
+        this.contents = farm.getContents();
     }
 }

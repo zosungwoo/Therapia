@@ -1,33 +1,20 @@
 package therapia.farm.dto.crop;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import therapia.farm.domain.crop.Crop;
-import therapia.farm.domain.crop.Effect;
-import therapia.farm.domain.crop.Recipe;
-
-import java.util.List;
-
-@Data
-@AllArgsConstructor
+@Getter
 public class CropDto {
-    private Long cropid;
-    private String name;
-    private String season;
-    private String temperature;
-    private String storage;
-    private List effects;
-    private List<Recipe> recipe;
+    private final Long id;
+    private final String name;
+    private final String season;
+    private final String temperature;
+    private final String storage;
 
-    public static CropDto of (Crop c, List<Effect> effects, List<Recipe> recipe) {
-        return new CropDto(
-                c.getId(),
-                c.getName(),
-                c.getSeason(),
-                c.getTemperature(),
-                c.getStorage(),
-                effects,
-                recipe
-        );
+    public CropDto(Crop crop) {
+        this.id = crop.getId();
+        this.name = crop.getName();
+        this.season = crop.getSeason();
+        this.temperature = crop.getTemperature();
+        this.storage = crop.getStorage();
     }
 }

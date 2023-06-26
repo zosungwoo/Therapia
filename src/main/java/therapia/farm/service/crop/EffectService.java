@@ -1,34 +1,40 @@
 package therapia.farm.service.crop;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import therapia.farm.domain.crop.CropEffect;
 import therapia.farm.domain.crop.Effect;
+import therapia.farm.domain.crop.Recipe;
+import therapia.farm.dto.crop.*;
+import therapia.farm.repository.crop.CropEffectRepository;
 import therapia.farm.repository.crop.EffectRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class EffectService {
-
-    @Autowired
-    private EffectRepository effectRepository;
-
-    public Long createEffect(Effect effect){
-        effectRepository.save(effect);
-        return effect.getId();
-    }
-
-    public Effect findOne(Long effectId){
-        return effectRepository.findById(effectId).get();
-    }
-
+    private final EffectRepository effectRepository;
+    private final CropEffectRepository cropEffectRepository;
+    private final CropEffectService cropEffectService;
+    private final RecipeService recipeService;
     // 모든 효능 조회
-    public List<Effect> findEffects(){
-        return effectRepository.findAll();  // 페이징도 가능
+    public List<EffectDto> findEffects(){
+        return effectRepository.findAll().stream().map(EffectDto::new).collect(Collectors.toList());  // 페이징도 가능
     }
+    //효능 ID로 작물 List 가져오기(효능과 레시피까지 가져오기)
+    public List<CropEffectRecipeDto> findCropEffectRecipeByEffectId (Long effectId) {
+        List<CropEffect> cropList = cropEffectRepository.findAllByEffectId(effectId);
+        List<CropEffectRecipeDto> result = new ArrayList<>();
+        for(CropEffect c:cropList) {
+            List<String> effectDtoList = cropEffectService.findEffectsByCropId(c.getCrop().getId());
+            result.add(new CropEffectRecipeDto(c, effectDtoList));
+        }
 
-
+        return result;
+    }
 }
