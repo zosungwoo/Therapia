@@ -1,16 +1,17 @@
 package therapia.farm.dto.crop;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import therapia.farm.domain.crop.Effect;
 
-@Data
-@AllArgsConstructor
+@Getter
 public class EffectDto {
-    private String effect;
+    private final Long id;
+    private final String symptom;
+    private final String effect;
 
-    public static EffectDto of (EffectDto e) {
-        return new EffectDto(
-                e.getEffect()
-        );
+    public EffectDto(Effect effect) {
+        this.id = effect.getId();
+        this.symptom = effect.getSymptom();
+        this.effect = effect.getEffect();
     }
 }

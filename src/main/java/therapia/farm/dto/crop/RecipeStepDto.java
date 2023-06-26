@@ -1,18 +1,16 @@
 package therapia.farm.dto.crop;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
+import lombok.Getter;
+import therapia.farm.domain.crop.RecipeStep;
+@Getter
 public class RecipeStepDto {
-    private Long stepIdx;
-    private String cooking;
+    private final Long id;
+    private final Long stepIdx;
+    private final String cooking;
 
-    public static RecipeStepDto of (RecipeStepDto r) {
-        return new RecipeStepDto(
-                r.getStepIdx(),
-                r.getCooking()
-        );
+    public RecipeStepDto(RecipeStep recipeStep) {
+        this.id = recipeStep.getId();
+        this.stepIdx = recipeStep.getStepIdx();
+        this.cooking = recipeStep.getCooking();
     }
 }
