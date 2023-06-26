@@ -1,5 +1,7 @@
 package therapia.farm.controller.farm;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -13,23 +15,27 @@ import therapia.farm.service.farm.FarmService;
 
 import javax.xml.transform.Result;
 
+@Api(tags = {"Farm API"})
 @Log4j2
 @RestController
 @RequiredArgsConstructor
 public class FarmApiController {
     private final FarmService farmService;
 
-    @GetMapping("/api/farm/findall")
+    @ApiOperation(value = "모든 농장 가져오기", notes = "모든 농장 List 가져오기")
+    @GetMapping("/api/farms")
     public Result farmList() {
         return new Result(farmService.findFarms());
     }
 
-    @GetMapping("/api/farm/{category}")
+    @ApiOperation(value = "카테고리별 농장 가져오기", notes = "카테고리 값으로 농장 List 가져오기")
+    @GetMapping("/api/farms/category/{category}")
     public Result farmByCategory(@PathVariable("category")FarmCategory farmCategory) {
         return new Result(farmService.findByCategory(farmCategory));
     }
 
-    @GetMapping("/api/farm/findone/{farmId}")
+    @ApiOperation(value = "농장 가져오기", notes = "농장 ID로 농장 가져오기")
+    @GetMapping("/api/farms/{farmId}")
     public Farm farmById(@PathVariable("farmId")Long farm_Id) {
         return farmService.findById(farm_Id);
     }
