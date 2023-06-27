@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import therapia.farm.domain.farm.FarmCategory;
 import therapia.farm.dto.crop.CropDto;
 import therapia.farm.dto.crop.EffectDto;
 import therapia.farm.dto.crop.RecipeDto;
@@ -30,6 +31,12 @@ public class CropApiController {
     @GetMapping("/api/crops")
     public ResponseEntity<List<CropDto>> cropList(){
         return new ResponseEntity<>(cropService.findCrops(), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "개별 작물 가져오기", notes = "작물 ID로 작물 가져오기")
+    @GetMapping("/api/crops/{cropId}")
+    public ResponseEntity<CropDto> cropById(@PathVariable("cropId") Long cropId){
+        return new ResponseEntity<>(cropService.findById(cropId), HttpStatus.OK);
     }
 
     @ApiOperation(value = "효능에 따른 작물 가져오기",
