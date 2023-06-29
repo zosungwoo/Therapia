@@ -18,6 +18,7 @@ public class Crop {
     private String season;
     private String temperature;
     private String storage;
+    private String img;
     @OneToMany(mappedBy = "crop", cascade = CascadeType.ALL)
     private List<Recipe> recipes = new ArrayList<>();
     @JsonIgnore

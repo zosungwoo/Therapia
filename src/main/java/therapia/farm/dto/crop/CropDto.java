@@ -9,6 +9,7 @@ public class CropDto {
     private final String season;
     private final String temperature;
     private final String storage;
+    private final String img;
 
     public CropDto(Crop crop) {
         this.id = crop.getId();
@@ -16,5 +17,6 @@ public class CropDto {
         this.season = crop.getSeason();
         this.temperature = crop.getTemperature();
         this.storage = crop.getStorage();
+        this.img = crop.getImg();
     }
 }
