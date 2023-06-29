@@ -103,7 +103,7 @@ public class ReviewService {
 
     //농장 ID로 조회
     public List<ReviewResponseDto> findByFarmId(Long farmId) {
-        if (reviewRepository.findReviewByFarmId(farmId).isEmpty()) {
+        if (farmRepository.findById(farmId).isEmpty()) {
             throw new CustomException("존재하지 않는 농장");
         }
         List<Review> reviewList = reviewRepository.findAllByFarmId(farmId);
