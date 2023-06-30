@@ -24,9 +24,6 @@ public class MemberService {
     public MemberResponseDto createMember(MemberRequestDto memberRequestDto){
         Optional<Member> member = memberRepository.findMemberByEmail(memberRequestDto.getEmail());
         if(member.isEmpty()){
-            if (memberRepository.findMemberByEmail(memberRequestDto.getEmail()).isPresent()) {
-                throw new CustomException("존재하는 이메일");
-            }
             if (memberRepository.findMemberByNickname(memberRequestDto.getNickname()).isPresent()) {
                 throw new CustomException("존재하는 닉네임");
             }
