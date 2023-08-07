@@ -1,4 +1,4 @@
-# Therapia - 농잠 검색 및 작물 진단 서비스
+# Therapia - 농장 검색 및 작물 진단 서비스
 *-2023 농림축산식품 공공빅데이터 활용 창업경진대회-*
 
 ![image](https://github.com/zosungwoo/Therapia/assets/30895117/c3682cec-0c48-4851-844a-dc8a2fa8a000)
