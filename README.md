@@ -1,4 +1,4 @@
-# farm_backend
+# Therapia_backend
 
 ### Therapia API 문서
 https://jeongjiyeon315.notion.site/API-02168d25316644f89af3bda19b9624b8
